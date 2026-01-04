@@ -24,6 +24,20 @@ const schedules = [
     ],
   },
   {
+    id: "thyroid-pills-am",
+    title: "Thyroid pills",
+    startMinutes: 10 * 60,
+    endMinutes: 10 * 60 + 30,
+    portionLabel: "1 dose",
+    foods: [
+      {
+        name: "Thyroid pills",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
+      },
+    ],
+  },
+  {
     id: "second-meal",
     title: "Second meal",
     startMinutes: 14 * 60,
@@ -62,6 +76,20 @@ const schedules = [
         grams: 20,
         photo:
           "https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg",
+      },
+    ],
+  },
+  {
+    id: "thyroid-pills-pm",
+    title: "Thyroid pills",
+    startMinutes: 22 * 60,
+    endMinutes: 22 * 60 + 30,
+    portionLabel: "1 dose",
+    foods: [
+      {
+        name: "Thyroid pills",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
       },
     ],
   },
@@ -146,11 +174,16 @@ export default function Home() {
   const minutesSinceMidnight = timeParts.hour * 60 + timeParts.minute;
   const berlinNowLabel = useMemo(() => formatBerlinDateTime(), [timeParts]);
 
-  const activeSchedule = schedules.find(
-    (schedule) =>
-      minutesSinceMidnight >= schedule.startMinutes &&
-      minutesSinceMidnight < schedule.endMinutes,
-  );
+  const activeSchedule = schedules
+    .filter(
+      (schedule) =>
+        minutesSinceMidnight >= schedule.startMinutes &&
+        minutesSinceMidnight < schedule.endMinutes,
+    )
+    .sort(
+      (a, b) =>
+        a.endMinutes - a.startMinutes - (b.endMinutes - b.startMinutes),
+    )[0];
 
   const totalGrams = activeSchedule
     ? activeSchedule.foods.reduce((sum, item) => sum + item.grams, 0)

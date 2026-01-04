@@ -122,7 +122,7 @@ const schedules = [
     id: 'evening-treats',
     title: 'Treats',
     startMinutes: 22 * 60 + 30,
-    endMinutes: 23 * 60,
+    endMinutes: 23 * 60 + 30,
     portionLabel: '1 portions',
     kind: 'meal',
     priority: 2,

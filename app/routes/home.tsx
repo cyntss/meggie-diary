@@ -13,13 +13,55 @@ const schedules = [
         name: "Regular horse meat wet food",
         grams: 50,
         photo:
-          "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80",
+          "https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png",
       },
       {
         name: "Diet wet food",
         grams: 20,
         photo:
-          "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=600&q=80",
+          "https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg",
+      },
+    ],
+  },
+  {
+    id: "second-meal",
+    title: "Second meal",
+    startMinutes: 14 * 60,
+    endMinutes: 16 * 60,
+    portionLabel: "1 portion",
+    foods: [
+      {
+        name: "Regular horse meat wet food",
+        grams: 50,
+        photo:
+          "https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png",
+      },
+      {
+        name: "Diet wet food",
+        grams: 20,
+        photo:
+          "https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg",
+      },
+    ],
+  },
+  {
+    id: "dinner",
+    title: "Dinner",
+    startMinutes: 19 * 60,
+    endMinutes: 20 * 60,
+    portionLabel: "1 portion",
+    foods: [
+      {
+        name: "Regular horse meat wet food",
+        grams: 50,
+        photo:
+          "https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png",
+      },
+      {
+        name: "Diet wet food",
+        grams: 20,
+        photo:
+          "https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg",
       },
     ],
   },

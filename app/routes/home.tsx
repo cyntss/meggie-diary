@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Dog, Pill, Utensils } from 'lucide-react';
 import type { Route } from './+types/home';
 
@@ -146,7 +146,8 @@ const schedules = [
       {
         name: 'Walk',
         grams: 0,
-        photo: 'https://openclipart.org/download/309835/1541553679.svg',
+        photo:
+          'https://scontent-ber1-1.cdninstagram.com/v/t51.75761-15/479925449_18066979456857358_4458961641504129436_n.webp?_nc_cat=107&ig_cache_key=MzU2NzgxMjY5MzgwOTM3NzkzMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTQ0MC5zZHIuQzMifQ%3D%3D&_nc_ohc=UAfsfjda3cQQ7kNvwFMztVA&_nc_oc=AdkBvf8PaVv8bXeOT8YM6ZJhMymPMIIAyDQoaBx0w-LqQBK-DRDSEfWAqMzhcdK8Bu7_PNM-Z5EKW9n3zNGCYLN-&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ber1-1.cdninstagram.com&_nc_gid=SO45FfAIFu8qSe5Ew74JIA&oh=00_AfpW_kq-kDBO_UZs7GO7FfZskjQxkCDmWtkicCB9agvgng&oe=69609FBD',
       },
     ],
   },
@@ -162,7 +163,8 @@ const schedules = [
       {
         name: 'Walk',
         grams: 0,
-        photo: 'https://openclipart.org/download/309835/1541553679.svg',
+        photo:
+          'https://scontent-ber1-1.cdninstagram.com/v/t51.75761-15/479925449_18066979456857358_4458961641504129436_n.webp?_nc_cat=107&ig_cache_key=MzU2NzgxMjY5MzgwOTM3NzkzMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTQ0MC5zZHIuQzMifQ%3D%3D&_nc_ohc=UAfsfjda3cQQ7kNvwFMztVA&_nc_oc=AdkBvf8PaVv8bXeOT8YM6ZJhMymPMIIAyDQoaBx0w-LqQBK-DRDSEfWAqMzhcdK8Bu7_PNM-Z5EKW9n3zNGCYLN-&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ber1-1.cdninstagram.com&_nc_gid=SO45FfAIFu8qSe5Ew74JIA&oh=00_AfpW_kq-kDBO_UZs7GO7FfZskjQxkCDmWtkicCB9agvgng&oe=69609FBD',
       },
     ],
   },
@@ -245,6 +247,10 @@ function getStorageKey(dateKey: string, scheduleId: string) {
 export default function Home() {
   const [timeParts, setTimeParts] = useState(getBerlinTimeParts);
   const [doneStatus, setDoneStatus] = useState<Record<string, boolean>>({});
+  const [expandedScheduleIds, setExpandedScheduleIds] = useState<
+    Record<string, boolean>
+  >({});
+  const lastDateKeyRef = useRef<string | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -255,6 +261,14 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const previousDateKey = lastDateKeyRef.current;
+    if (previousDateKey && previousDateKey !== timeParts.dateKey) {
+      schedules.forEach((schedule) => {
+        localStorage.removeItem(getStorageKey(previousDateKey, schedule.id));
+      });
+    }
+    lastDateKeyRef.current = timeParts.dateKey;
+
     const nextDoneStatus: Record<string, boolean> = {};
     schedules.forEach((schedule) => {
       const key = getStorageKey(timeParts.dateKey, schedule.id);
@@ -318,15 +332,26 @@ export default function Home() {
 
   const handleToggleDone = (scheduleId: string) => {
     setDoneStatus((prev) => {
+      const currentTimeParts = getBerlinTimeParts();
+      if (currentTimeParts.dateKey !== timeParts.dateKey) {
+        setTimeParts(currentTimeParts);
+      }
       const schedule = schedules.find((item) => item.id === scheduleId);
       if (schedule && !isToggleAllowed(schedule)) {
         return prev;
       }
       const nextValue = !(prev[scheduleId] ?? false);
-      const key = getStorageKey(timeParts.dateKey, scheduleId);
+      const key = getStorageKey(currentTimeParts.dateKey, scheduleId);
       localStorage.setItem(key, String(nextValue));
       return { ...prev, [scheduleId]: nextValue };
     });
+  };
+
+  const handleToggleDetails = (scheduleId: string) => {
+    setExpandedScheduleIds((prev) => ({
+      ...prev,
+      [scheduleId]: !prev[scheduleId],
+    }));
   };
 
   return (
@@ -533,18 +558,29 @@ export default function Home() {
                       {formatTime(schedule.endMinutes)}
                     </p>
                   </div>
-                  <button
-                    type='button'
-                    onClick={() => handleToggleDone(schedule.id)}
-                    disabled={!isToggleAllowed(schedule)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                      doneStatus[schedule.id]
-                        ? 'bg-emerald-100 text-emerald-700'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    } disabled:cursor-not-allowed disabled:opacity-60`}
-                  >
-                    {doneStatus[schedule.id] ? 'Done' : 'Mark done'}
-                  </button>
+                  <div className='flex flex-wrap items-center gap-3'>
+                    <button
+                      type='button'
+                      onClick={() => handleToggleDetails(schedule.id)}
+                      className='rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-slate-50'
+                    >
+                      {expandedScheduleIds[schedule.id]
+                        ? 'Hide details'
+                        : 'Show details'}
+                    </button>
+                    <button
+                      type='button'
+                      onClick={() => handleToggleDone(schedule.id)}
+                      disabled={!isToggleAllowed(schedule)}
+                      className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                        doneStatus[schedule.id]
+                          ? 'bg-emerald-100 text-emerald-700'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      } disabled:cursor-not-allowed disabled:opacity-60`}
+                    >
+                      {doneStatus[schedule.id] ? 'Done' : 'Mark done'}
+                    </button>
+                  </div>
                 </div>
                 <div className='mt-4 flex flex-wrap items-center gap-3 text-sm text-slate-600'>
                   <span className='rounded-full bg-slate-100 px-3 py-1'>
@@ -558,6 +594,57 @@ export default function Home() {
                     Priority {schedule.priority}
                   </span>
                 </div>
+                {expandedScheduleIds[schedule.id] ? (
+                  <div className='mt-4 grid gap-4'>
+                    <div className='rounded-2xl bg-slate-50 p-4 text-sm text-slate-700'>
+                      <div className='flex flex-wrap items-center justify-between gap-3'>
+                        <div>
+                          <p className='font-semibold'>Serving window</p>
+                          <p>
+                            {formatTime(schedule.startMinutes)} -{' '}
+                            {formatTime(schedule.endMinutes)}
+                          </p>
+                        </div>
+                        <div>
+                          <p className='font-semibold'>Total grams</p>
+                          <p>
+                            {getTotalGrams(schedule)} g •{' '}
+                            {schedule.portionLabel}
+                          </p>
+                        </div>
+                        <div>
+                          <p className='font-semibold'>Priority</p>
+                          <p>{schedule.priority}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='grid gap-4 sm:grid-cols-2'>
+                      {schedule.foods.map((food) => (
+                        <article
+                          key={food.name}
+                          className='flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm'
+                        >
+                          <div className='schedule-image-wrapper'>
+                            <img
+                              src={food.photo}
+                              alt={food.name}
+                              className='schedule-image'
+                              loading='lazy'
+                            />
+                          </div>
+                          <div className='flex flex-1 flex-col gap-2 p-4'>
+                            <h3 className='text-lg font-semibold text-slate-900'>
+                              {food.name}
+                            </h3>
+                            <p className='text-sm text-slate-600'>
+                              {food.grams} grams
+                            </p>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>

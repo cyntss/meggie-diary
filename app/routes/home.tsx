@@ -261,13 +261,21 @@ export default function Home() {
     []
   );
 
+  const activeScheduleSorter = (
+    first: (typeof schedules)[number],
+    second: (typeof schedules)[number]
+  ) =>
+    first.priority - second.priority ||
+    first.startMinutes - second.startMinutes ||
+    first.title.localeCompare(second.title);
+
   const activeSchedules = schedules
     .filter(
       (schedule) =>
         minutesSinceMidnight >= schedule.startMinutes &&
         minutesSinceMidnight < schedule.endMinutes
     )
-    .sort(scheduleSorter);
+    .sort(activeScheduleSorter);
   const activeScheduleIds = new Set(
     activeSchedules.map((schedule) => schedule.id)
   );

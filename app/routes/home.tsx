@@ -8,7 +8,7 @@ const schedules = [
     title: 'Breakfast',
     startMinutes: 9 * 60 + 30,
     endMinutes: 11 * 60,
-    portionLabel: '1 portion',
+    portionLabel: '2 portions',
     kind: 'meal',
     priority: 2,
     foods: [
@@ -31,7 +31,7 @@ const schedules = [
     title: 'Treats',
     startMinutes: 10 * 60 + 30,
     endMinutes: 11 * 60,
-    portionLabel: '2 portions',
+    portionLabel: '2 treats',
     kind: 'meal',
     priority: 4,
     foods: [
@@ -52,7 +52,7 @@ const schedules = [
     title: 'Thyroid pills',
     startMinutes: 10 * 60,
     endMinutes: 10 * 60 + 30,
-    portionLabel: '1 dose',
+    portionLabel: '1/4 dose',
     kind: 'pills',
     priority: 3,
     foods: [
@@ -68,7 +68,7 @@ const schedules = [
     title: 'Second meal',
     startMinutes: 14 * 60,
     endMinutes: 16 * 60,
-    portionLabel: '1 portion',
+    portionLabel: '2 portions',
     kind: 'meal',
     priority: 2,
     foods: [
@@ -107,7 +107,7 @@ const schedules = [
     title: 'Thyroid pills',
     startMinutes: 22 * 60,
     endMinutes: 22 * 60 + 30,
-    portionLabel: '1 dose',
+    portionLabel: '1/4 dose',
     kind: 'pills',
     priority: 1,
     foods: [
@@ -123,7 +123,7 @@ const schedules = [
     title: 'Treats',
     startMinutes: 22 * 60 + 30,
     endMinutes: 23 * 60 + 30,
-    portionLabel: '1 portions',
+    portionLabel: '1 treat',
     kind: 'meal',
     priority: 2,
     foods: [

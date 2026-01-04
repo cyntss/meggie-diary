@@ -450,12 +450,14 @@ export default function Home() {
                             key={food.name}
                             className='flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm'
                           >
-                            <img
-                              src={food.photo}
-                              alt={food.name}
-                              className='h-40 w-full object-cover'
-                              loading='lazy'
-                            />
+                            <div className='schedule-image-wrapper'>
+                              <img
+                                src={food.photo}
+                                alt={food.name}
+                                className='schedule-image'
+                                loading='lazy'
+                              />
+                            </div>
                             <div className='flex flex-1 flex-col gap-2 p-4'>
                               <h3 className='text-lg font-semibold text-slate-900'>
                                 {food.name}

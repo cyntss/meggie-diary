@@ -13,3 +13,11 @@ body {
     color-scheme: dark;
   }
 }
+
+.schedule-image-wrapper {
+  @apply aspect-square w-full bg-slate-100;
+}
+
+.schedule-image {
+  @apply h-full w-full object-contain;
+}

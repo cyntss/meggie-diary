@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Dog, Utensils } from "lucide-react";
+import { Dog, Pill, Utensils } from "lucide-react";
 import type { Route } from "./+types/home";
 
 const schedules = [
@@ -209,6 +209,10 @@ export default function Home() {
 
   const minutesSinceMidnight = timeParts.hour * 60 + timeParts.minute;
   const berlinNowLabel = useMemo(() => formatBerlinDateTime(), [timeParts]);
+  const sortedSchedules = useMemo(
+    () => [...schedules].sort((a, b) => a.startMinutes - b.startMinutes),
+    [],
+  );
 
   const activeSchedule = schedules
     .filter(
@@ -237,16 +241,26 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-12">
-        <header className="flex flex-col gap-3">
+        <header className="flex flex-col items-start gap-4">
+          <img
+            src="https://scontent-ber1-1.cdninstagram.com/v/t51.82787-15/532915064_18083694682857358_3567004977730663315_n.webp?_nc_cat=109&ig_cache_key=MzY5OTgzNTA4OTM1NjY2MzYwMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTQ0MC5zZHIuQzMifQ%3D%3D&_nc_ohc=mzR1ABECet4Q7kNvwH21L3z&_nc_oc=AdkF5hpeJf8Eqpl6CMCYtPQzlF5qjBRPiXzowQHBBYk51-205TjGDNhJ4RWAGL9Q0LN25lwA1EZGNTlLiVbGOQ4J&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ber1-1.cdninstagram.com&_nc_gid=sGqkJtssEJcVOoQkqktnsg&oh=00_AfqVJxabhUhzOVkQDe_PBmUdILKjttbxVYl61kUvKR6DDA&oe=69605E15"
+            alt="Meggie"
+            className="h-24 w-24 rounded-full object-cover shadow-sm"
+          />
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500">
             Meggie&apos;s diary
           </p>
-          <h1 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
-            Meal schedule for Berlin time
-          </h1>
-          <p className="text-base text-slate-600">
-            Current time in Berlin: <span className="font-semibold">{berlinNowLabel}</span>
-          </p>
+          <div className="space-y-2">
+            <h1 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
+              Gaby &amp; Steve&apos;s sweet Meggie guide
+            </h1>
+            <p className="text-base text-slate-600">
+              Thanks for looking after Meggie — here&apos;s her Berlin-time routine at a glance.
+            </p>
+            <p className="text-base text-slate-600">
+              Current time in Berlin: <span className="font-semibold">{berlinNowLabel}</span>
+            </p>
+          </div>
         </header>
 
         <section className="grid gap-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
@@ -326,7 +340,7 @@ export default function Home() {
         <section className="grid gap-4">
           <h2 className="text-xl font-semibold text-slate-900">Today&apos;s plan</h2>
           <div className="grid gap-4">
-            {schedules.map((schedule) => (
+            {sortedSchedules.map((schedule) => (
               <div
                 key={schedule.id}
                 className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
@@ -338,6 +352,18 @@ export default function Home() {
                         <Utensils
                           className="mr-2 inline-block h-4 w-4 text-slate-400"
                           aria-label="Food"
+                        />
+                      ) : null}
+                      {schedule.kind === "pills" ? (
+                        <Pill
+                          className="mr-2 inline-block h-4 w-4 text-slate-400"
+                          aria-label="Medication"
+                        />
+                      ) : null}
+                      {schedule.kind === "walk" ? (
+                        <Dog
+                          className="mr-2 inline-block h-4 w-4 text-slate-400"
+                          aria-label="Dog walking"
                         />
                       ) : null}
                       {schedule.title}
@@ -370,9 +396,6 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="flex justify-center">
-            <Dog className="h-8 w-8 text-slate-500" aria-label="Dog walking" />
           </div>
         </section>
       </div>

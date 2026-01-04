@@ -15,7 +15,7 @@ body {
 }
 
 .schedule-image-wrapper {
-  @apply aspect-square w-full bg-slate-100;
+  @apply aspect-square w-full max-w-[300px] max-h-[300px] bg-slate-100;
 }
 
 .schedule-image {

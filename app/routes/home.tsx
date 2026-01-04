@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Dog, Utensils } from "lucide-react";
 import type { Route } from "./+types/home";
 
 const schedules = [
@@ -8,18 +9,123 @@ const schedules = [
     startMinutes: 8 * 60,
     endMinutes: 11 * 60,
     portionLabel: "1 portion",
+    kind: "meal",
     foods: [
       {
         name: "Regular horse meat wet food",
         grams: 50,
         photo:
-          "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80",
+          "https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png",
       },
       {
         name: "Diet wet food",
         grams: 20,
         photo:
-          "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=600&q=80",
+          "https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg",
+      },
+    ],
+  },
+  {
+    id: "thyroid-pills-am",
+    title: "Thyroid pills",
+    startMinutes: 10 * 60,
+    endMinutes: 10 * 60 + 30,
+    portionLabel: "1 dose",
+    kind: "pills",
+    foods: [
+      {
+        name: "Thyroid pills",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
+      },
+    ],
+  },
+  {
+    id: "second-meal",
+    title: "Second meal",
+    startMinutes: 14 * 60,
+    endMinutes: 16 * 60,
+    portionLabel: "1 portion",
+    kind: "meal",
+    foods: [
+      {
+        name: "Regular horse meat wet food",
+        grams: 50,
+        photo:
+          "https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png",
+      },
+      {
+        name: "Diet wet food",
+        grams: 20,
+        photo:
+          "https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg",
+      },
+    ],
+  },
+  {
+    id: "dinner",
+    title: "Dinner",
+    startMinutes: 19 * 60,
+    endMinutes: 20 * 60,
+    portionLabel: "1 portion",
+    kind: "meal",
+    foods: [
+      {
+        name: "Regular horse meat wet food",
+        grams: 50,
+        photo:
+          "https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png",
+      },
+      {
+        name: "Diet wet food",
+        grams: 20,
+        photo:
+          "https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg",
+      },
+    ],
+  },
+  {
+    id: "thyroid-pills-pm",
+    title: "Thyroid pills",
+    startMinutes: 22 * 60,
+    endMinutes: 22 * 60 + 30,
+    portionLabel: "1 dose",
+    kind: "pills",
+    foods: [
+      {
+        name: "Thyroid pills",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
+      },
+    ],
+  },
+  {
+    id: "first-walk",
+    title: "First walk",
+    startMinutes: 8 * 60,
+    endMinutes: 10 * 60,
+    portionLabel: "Walk time",
+    kind: "walk",
+    foods: [
+      {
+        name: "Walk",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
+      },
+    ],
+  },
+  {
+    id: "last-walk",
+    title: "Last walk",
+    startMinutes: 14 * 60,
+    endMinutes: 15 * 60 + 30,
+    portionLabel: "Walk time",
+    kind: "walk",
+    foods: [
+      {
+        name: "Walk",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
       },
     ],
   },
@@ -104,11 +210,16 @@ export default function Home() {
   const minutesSinceMidnight = timeParts.hour * 60 + timeParts.minute;
   const berlinNowLabel = useMemo(() => formatBerlinDateTime(), [timeParts]);
 
-  const activeSchedule = schedules.find(
-    (schedule) =>
-      minutesSinceMidnight >= schedule.startMinutes &&
-      minutesSinceMidnight < schedule.endMinutes,
-  );
+  const activeSchedule = schedules
+    .filter(
+      (schedule) =>
+        minutesSinceMidnight >= schedule.startMinutes &&
+        minutesSinceMidnight < schedule.endMinutes,
+    )
+    .sort(
+      (a, b) =>
+        a.endMinutes - a.startMinutes - (b.endMinutes - b.startMinutes),
+    )[0];
 
   const totalGrams = activeSchedule
     ? activeSchedule.foods.reduce((sum, item) => sum + item.grams, 0)
@@ -222,7 +333,15 @@ export default function Home() {
               >
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm text-slate-500">{schedule.title}</p>
+                    <p className="text-sm text-slate-500">
+                      {schedule.kind === "meal" ? (
+                        <Utensils
+                          className="mr-2 inline-block h-4 w-4 text-slate-400"
+                          aria-label="Food"
+                        />
+                      ) : null}
+                      {schedule.title}
+                    </p>
                     <p className="text-base font-semibold text-slate-900">
                       {Math.floor(schedule.startMinutes / 60)}:00 - {Math.floor(
                         schedule.endMinutes / 60,
@@ -251,6 +370,9 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="flex justify-center">
+            <Dog className="h-8 w-8 text-slate-500" aria-label="Dog walking" />
           </div>
         </section>
       </div>

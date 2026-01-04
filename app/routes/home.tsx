@@ -28,8 +28,8 @@ const schedules = [
   {
     id: 'morning-treats',
     title: 'Treats',
-    startMinutes: 18 * 60 + 30,
-    endMinutes: 20 * 60,
+    startMinutes: 9 * 60 + 30,
+    endMinutes: 11 * 60,
     portionLabel: '2 portions',
     kind: 'meal',
     foods: [

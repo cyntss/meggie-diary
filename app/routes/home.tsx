@@ -8,6 +8,7 @@ const schedules = [
     startMinutes: 8 * 60,
     endMinutes: 11 * 60,
     portionLabel: "1 portion",
+    kind: "meal",
     foods: [
       {
         name: "Regular horse meat wet food",
@@ -29,6 +30,7 @@ const schedules = [
     startMinutes: 10 * 60,
     endMinutes: 10 * 60 + 30,
     portionLabel: "1 dose",
+    kind: "pills",
     foods: [
       {
         name: "Thyroid pills",
@@ -43,6 +45,7 @@ const schedules = [
     startMinutes: 14 * 60,
     endMinutes: 16 * 60,
     portionLabel: "1 portion",
+    kind: "meal",
     foods: [
       {
         name: "Regular horse meat wet food",
@@ -64,6 +67,7 @@ const schedules = [
     startMinutes: 19 * 60,
     endMinutes: 20 * 60,
     portionLabel: "1 portion",
+    kind: "meal",
     foods: [
       {
         name: "Regular horse meat wet food",
@@ -85,9 +89,40 @@ const schedules = [
     startMinutes: 22 * 60,
     endMinutes: 22 * 60 + 30,
     portionLabel: "1 dose",
+    kind: "pills",
     foods: [
       {
         name: "Thyroid pills",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
+      },
+    ],
+  },
+  {
+    id: "first-walk",
+    title: "First walk",
+    startMinutes: 8 * 60,
+    endMinutes: 10 * 60,
+    portionLabel: "Walk time",
+    kind: "walk",
+    foods: [
+      {
+        name: "Walk",
+        grams: 0,
+        photo: "https://openclipart.org/download/309835/1541553679.svg",
+      },
+    ],
+  },
+  {
+    id: "last-walk",
+    title: "Last walk",
+    startMinutes: 14 * 60,
+    endMinutes: 15 * 60 + 30,
+    portionLabel: "Walk time",
+    kind: "walk",
+    foods: [
+      {
+        name: "Walk",
         grams: 0,
         photo: "https://openclipart.org/download/309835/1541553679.svg",
       },
@@ -297,7 +332,14 @@ export default function Home() {
               >
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm text-slate-500">{schedule.title}</p>
+                    <p className="text-sm text-slate-500">
+                      {schedule.kind === "meal" ? (
+                        <span role="img" aria-label="Food" className="mr-2">
+                          🍽️
+                        </span>
+                      ) : null}
+                      {schedule.title}
+                    </p>
                     <p className="text-base font-semibold text-slate-900">
                       {Math.floor(schedule.startMinutes / 60)}:00 - {Math.floor(
                         schedule.endMinutes / 60,
@@ -326,6 +368,11 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="flex justify-center text-3xl">
+            <span role="img" aria-label="Dog walking">
+              🐕‍🦺
+            </span>
           </div>
         </section>
       </div>

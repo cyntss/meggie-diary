@@ -10,6 +10,7 @@ const schedules = [
     endMinutes: 11 * 60,
     portionLabel: '1 portion',
     kind: 'meal',
+    priority: 2,
     foods: [
       {
         name: 'Regular horse meat wet food',
@@ -32,6 +33,7 @@ const schedules = [
     endMinutes: 11 * 60,
     portionLabel: '2 portions',
     kind: 'meal',
+    priority: 4,
     foods: [
       {
         name: 'Gelenke treat once per day',
@@ -52,6 +54,7 @@ const schedules = [
     endMinutes: 10 * 60 + 30,
     portionLabel: '1 dose',
     kind: 'pills',
+    priority: 3,
     foods: [
       {
         name: 'Thyroid pills',
@@ -67,6 +70,7 @@ const schedules = [
     endMinutes: 16 * 60,
     portionLabel: '1 portion',
     kind: 'meal',
+    priority: 2,
     foods: [
       {
         name: 'Regular horse meat wet food',
@@ -89,6 +93,7 @@ const schedules = [
     endMinutes: 20 * 60,
     portionLabel: '1 portion',
     kind: 'meal',
+    priority: 2,
     foods: [
       {
         name: 'Regular horse meat wet food',
@@ -111,6 +116,7 @@ const schedules = [
     endMinutes: 22 * 60 + 30,
     portionLabel: '1 dose',
     kind: 'pills',
+    priority: 3,
     foods: [
       {
         name: 'Thyroid pills',
@@ -126,6 +132,7 @@ const schedules = [
     endMinutes: 10 * 60,
     portionLabel: 'Walk time',
     kind: 'walk',
+    priority: 1,
     foods: [
       {
         name: 'Walk',
@@ -141,6 +148,7 @@ const schedules = [
     endMinutes: 15 * 60 + 30,
     portionLabel: 'Walk time',
     kind: 'walk',
+    priority: 1,
     foods: [
       {
         name: 'Walk',
@@ -152,6 +160,12 @@ const schedules = [
 ];
 
 const STORAGE_PREFIX = 'meggie-diary-done';
+type Schedule = (typeof schedules)[number];
+
+const scheduleSorter = (first: Schedule, second: Schedule) =>
+  first.startMinutes - second.startMinutes ||
+  first.priority - second.priority ||
+  first.title.localeCompare(second.title);
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -243,7 +257,7 @@ export default function Home() {
   const minutesSinceMidnight = timeParts.hour * 60 + timeParts.minute;
   const berlinNowLabel = useMemo(() => formatBerlinDateTime(), [timeParts]);
   const sortedSchedules = useMemo(
-    () => [...schedules].sort((a, b) => a.startMinutes - b.startMinutes),
+    () => [...schedules].sort(scheduleSorter),
     []
   );
 
@@ -253,7 +267,7 @@ export default function Home() {
         minutesSinceMidnight >= schedule.startMinutes &&
         minutesSinceMidnight < schedule.endMinutes
     )
-    .sort((a, b) => a.startMinutes - b.startMinutes);
+    .sort(scheduleSorter);
 
   const getTotalGrams = (schedule: (typeof schedules)[number]) =>
     schedule.foods.reduce((sum, item) => sum + item.grams, 0);
@@ -314,9 +328,14 @@ export default function Home() {
                 <div key={schedule.id} className='grid gap-6'>
                   <div className='flex flex-wrap items-center justify-between gap-4'>
                     <div>
-                      <p className='text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500'>
-                        {schedule.title}
-                      </p>
+                      <div className='flex flex-wrap items-center gap-3'>
+                        <p className='text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500'>
+                          {schedule.title}
+                        </p>
+                        <span className='rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700'>
+                          Priority {schedule.priority}
+                        </span>
+                      </div>
                       <p className='text-base font-semibold text-slate-900'>
                         {formatTime(schedule.startMinutes)} -{' '}
                         {formatTime(schedule.endMinutes)}
@@ -351,6 +370,10 @@ export default function Home() {
                           {getTotalGrams(schedule)} g •{' '}
                           {schedule.portionLabel}
                         </p>
+                      </div>
+                      <div>
+                        <p className='font-semibold'>Priority</p>
+                        <p>{schedule.priority}</p>
                       </div>
                     </div>
                   </div>
@@ -446,6 +469,9 @@ export default function Home() {
                   </span>
                   <span className='rounded-full bg-slate-100 px-3 py-1'>
                     {schedule.portionLabel}
+                  </span>
+                  <span className='rounded-full bg-slate-100 px-3 py-1'>
+                    Priority {schedule.priority}
                   </span>
                 </div>
               </div>

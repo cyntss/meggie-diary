@@ -275,6 +275,12 @@ export default function Home() {
   const getTotalGrams = (schedule: (typeof schedules)[number]) =>
     schedule.foods.reduce((sum, item) => sum + item.grams, 0);
 
+  const isBlocked = (schedule: (typeof schedules)[number]) =>
+    activeSchedules.length > 1 &&
+    activeScheduleIds.has(schedule.id) &&
+    !doneStatus[schedule.id] &&
+    !isToggleAllowed(schedule);
+
   const isToggleAllowed = (schedule: (typeof schedules)[number]) => {
     if (activeSchedules.length <= 1) {
       return true;
@@ -350,84 +356,112 @@ export default function Home() {
           {activeSchedules.length > 0 ? (
             <div className='grid gap-8'>
               {activeSchedules.map((schedule) => (
-                <div key={schedule.id} className='grid gap-6'>
-                  <div className='flex flex-wrap items-center justify-between gap-4'>
-                    <div>
-                      <div className='flex flex-wrap items-center gap-3'>
-                        <p className='text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500'>
-                          {schedule.title}
-                        </p>
-                        <span className='rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700'>
-                          Priority {schedule.priority}
-                        </span>
-                      </div>
-                      <p className='text-base font-semibold text-slate-900'>
-                        {formatTime(schedule.startMinutes)} -{' '}
-                        {formatTime(schedule.endMinutes)}
-                      </p>
-                    </div>
-                    <button
-                      type='button'
-                      onClick={() => handleToggleDone(schedule.id)}
-                      disabled={!isToggleAllowed(schedule)}
-                      className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition ${
-                        doneStatus[schedule.id]
-                          ? 'bg-emerald-500 text-white'
-                          : 'bg-slate-900 text-white hover:bg-slate-800'
-                      } disabled:cursor-not-allowed disabled:opacity-60`}
-                    >
-                      {doneStatus[schedule.id]
-                        ? 'Marked as done'
-                        : 'Mark as done'}
-                    </button>
-                  </div>
-                  <div className='rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900'>
-                    <div className='flex flex-wrap items-center justify-between gap-3'>
+                <details
+                  key={schedule.id}
+                  open={
+                    activeSchedules.length <= 1 ||
+                    (!doneStatus[schedule.id] && !isBlocked(schedule))
+                  }
+                  className='grid gap-6'
+                >
+                  <summary className='list-none'>
+                    <div className='flex flex-wrap items-center justify-between gap-4'>
                       <div>
-                        <p className='font-semibold'>Serving window</p>
-                        <p>
+                        <div className='flex flex-wrap items-center gap-3'>
+                          <p className='text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500'>
+                            {schedule.title}
+                          </p>
+                          <span className='rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700'>
+                            Priority {schedule.priority}
+                          </span>
+                          {isBlocked(schedule) ? (
+                            <span className='rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-700'>
+                              Waiting
+                            </span>
+                          ) : null}
+                          {doneStatus[schedule.id] ? (
+                            <span className='rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700'>
+                              Done
+                            </span>
+                          ) : null}
+                        </div>
+                        <p className='text-base font-semibold text-slate-900'>
                           {formatTime(schedule.startMinutes)} -{' '}
                           {formatTime(schedule.endMinutes)}
                         </p>
                       </div>
-                      <div>
-                        <p className='font-semibold'>Total grams</p>
-                        <p>
-                          {getTotalGrams(schedule)} g •{' '}
-                          {schedule.portionLabel}
-                        </p>
-                      </div>
-                      <div>
-                        <p className='font-semibold'>Priority</p>
-                        <p>{schedule.priority}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='grid gap-4 sm:grid-cols-2'>
-                    {schedule.foods.map((food) => (
-                      <article
-                        key={food.name}
-                        className='flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm'
+                      <button
+                        type='button'
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          handleToggleDone(schedule.id);
+                        }}
+                        disabled={!isToggleAllowed(schedule)}
+                        className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition ${
+                          doneStatus[schedule.id]
+                            ? 'bg-emerald-500 text-white'
+                            : 'bg-slate-900 text-white hover:bg-slate-800'
+                        } disabled:cursor-not-allowed disabled:opacity-60`}
                       >
-                        <img
-                          src={food.photo}
-                          alt={food.name}
-                          className='h-40 w-full object-cover'
-                          loading='lazy'
-                        />
-                        <div className='flex flex-1 flex-col gap-2 p-4'>
-                          <h3 className='text-lg font-semibold text-slate-900'>
-                            {food.name}
-                          </h3>
-                          <p className='text-sm text-slate-600'>
-                            {food.grams} grams
-                          </p>
+                        {doneStatus[schedule.id]
+                          ? 'Marked as done'
+                          : 'Mark as done'}
+                      </button>
+                    </div>
+                  </summary>
+                  {(!doneStatus[schedule.id] && !isBlocked(schedule)) ||
+                  activeSchedules.length <= 1 ? (
+                    <>
+                      <div className='rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900'>
+                        <div className='flex flex-wrap items-center justify-between gap-3'>
+                          <div>
+                            <p className='font-semibold'>Serving window</p>
+                            <p>
+                              {formatTime(schedule.startMinutes)} -{' '}
+                              {formatTime(schedule.endMinutes)}
+                            </p>
+                          </div>
+                          <div>
+                            <p className='font-semibold'>Total grams</p>
+                            <p>
+                              {getTotalGrams(schedule)} g •{' '}
+                              {schedule.portionLabel}
+                            </p>
+                          </div>
+                          <div>
+                            <p className='font-semibold'>Priority</p>
+                            <p>{schedule.priority}</p>
+                          </div>
                         </div>
-                      </article>
-                    ))}
-                  </div>
-                </div>
+                      </div>
+
+                      <div className='grid gap-4 sm:grid-cols-2'>
+                        {schedule.foods.map((food) => (
+                          <article
+                            key={food.name}
+                            className='flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm'
+                          >
+                            <img
+                              src={food.photo}
+                              alt={food.name}
+                              className='h-40 w-full object-cover'
+                              loading='lazy'
+                            />
+                            <div className='flex flex-1 flex-col gap-2 p-4'>
+                              <h3 className='text-lg font-semibold text-slate-900'>
+                                {food.name}
+                              </h3>
+                              <p className='text-sm text-slate-600'>
+                                {food.grams} grams
+                              </p>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    </>
+                  ) : null}
+                </details>
               ))}
             </div>
           ) : (

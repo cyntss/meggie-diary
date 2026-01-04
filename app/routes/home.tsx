@@ -268,12 +268,37 @@ export default function Home() {
         minutesSinceMidnight < schedule.endMinutes
     )
     .sort(scheduleSorter);
+  const activeScheduleIds = new Set(
+    activeSchedules.map((schedule) => schedule.id)
+  );
 
   const getTotalGrams = (schedule: (typeof schedules)[number]) =>
     schedule.foods.reduce((sum, item) => sum + item.grams, 0);
 
+  const isToggleAllowed = (schedule: (typeof schedules)[number]) => {
+    if (activeSchedules.length <= 1) {
+      return true;
+    }
+
+    if (!activeScheduleIds.has(schedule.id)) {
+      return true;
+    }
+
+    const higherPrioritySchedules = activeSchedules.filter(
+      (activeSchedule) => activeSchedule.priority < schedule.priority
+    );
+
+    return higherPrioritySchedules.every(
+      (activeSchedule) => doneStatus[activeSchedule.id]
+    );
+  };
+
   const handleToggleDone = (scheduleId: string) => {
     setDoneStatus((prev) => {
+      const schedule = schedules.find((item) => item.id === scheduleId);
+      if (schedule && !isToggleAllowed(schedule)) {
+        return prev;
+      }
       const nextValue = !(prev[scheduleId] ?? false);
       const key = getStorageKey(timeParts.dateKey, scheduleId);
       localStorage.setItem(key, String(nextValue));
@@ -344,11 +369,12 @@ export default function Home() {
                     <button
                       type='button'
                       onClick={() => handleToggleDone(schedule.id)}
+                      disabled={!isToggleAllowed(schedule)}
                       className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition ${
                         doneStatus[schedule.id]
                           ? 'bg-emerald-500 text-white'
                           : 'bg-slate-900 text-white hover:bg-slate-800'
-                      }`}
+                      } disabled:cursor-not-allowed disabled:opacity-60`}
                     >
                       {doneStatus[schedule.id]
                         ? 'Marked as done'
@@ -453,11 +479,12 @@ export default function Home() {
                   <button
                     type='button'
                     onClick={() => handleToggleDone(schedule.id)}
+                    disabled={!isToggleAllowed(schedule)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       doneStatus[schedule.id]
                         ? 'bg-emerald-100 text-emerald-700'
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
+                    } disabled:cursor-not-allowed disabled:opacity-60`}
                   >
                     {doneStatus[schedule.id] ? 'Done' : 'Mark done'}
                   </button>

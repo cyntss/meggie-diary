@@ -182,6 +182,13 @@ function formatBerlinDateTime() {
   }).format(new Date());
 }
 
+function formatMinutes(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  return `${hours}:${String(remainingMinutes).padStart(2, "0")}`;
+}
+
 function getStorageKey(dateKey: string, scheduleId: string) {
   return `${STORAGE_PREFIX}:${dateKey}:${scheduleId}`;
 }
@@ -293,9 +300,8 @@ export default function Home() {
                   <div>
                     <p className="font-semibold">Serving window</p>
                     <p>
-                      {Math.floor(activeSchedule.startMinutes / 60)}:00 - {Math.floor(
-                        activeSchedule.endMinutes / 60,
-                      )}:00
+                      {formatMinutes(activeSchedule.startMinutes)} -{" "}
+                      {formatMinutes(activeSchedule.endMinutes)}
                     </p>
                   </div>
                   <div>
@@ -369,9 +375,8 @@ export default function Home() {
                       {schedule.title}
                     </p>
                     <p className="text-base font-semibold text-slate-900">
-                      {Math.floor(schedule.startMinutes / 60)}:00 - {Math.floor(
-                        schedule.endMinutes / 60,
-                      )}:00
+                      {formatMinutes(schedule.startMinutes)} -{" "}
+                      {formatMinutes(schedule.endMinutes)}
                     </p>
                   </div>
                   <button

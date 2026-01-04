@@ -14,7 +14,7 @@ const schedules = [
     foods: [
       {
         name: 'Regular horse meat wet food',
-        grams: 50,
+        grams: 60,
         photo:
           'https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png',
       },
@@ -29,7 +29,7 @@ const schedules = [
   {
     id: 'morning-treats',
     title: 'Treats',
-    startMinutes: 9 * 60 + 30,
+    startMinutes: 10 * 60 + 30,
     endMinutes: 11 * 60,
     portionLabel: '2 portions',
     kind: 'meal',
@@ -74,7 +74,7 @@ const schedules = [
     foods: [
       {
         name: 'Regular horse meat wet food',
-        grams: 50,
+        grams: 60,
         photo:
           'https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png',
       },
@@ -93,19 +93,12 @@ const schedules = [
     endMinutes: 20 * 60,
     portionLabel: '1 portion',
     kind: 'meal',
-    priority: 2,
+    priority: 1,
     foods: [
       {
-        name: 'Regular horse meat wet food',
-        grams: 50,
-        photo:
-          'https://hundefutter-vergleich24.de/wp-content/uploads/2023/03/Vet-Concept.png',
-      },
-      {
-        name: 'Diet wet food',
-        grams: 20,
-        photo:
-          'https://static.zoomalia.com/cdn-cgi/image/width=800,height=800,format=auto/prod_img/59843/lm_58246922a0880a8f11f8f69cbb52b1396be1763543904.jpg',
+        name: 'Dry food',
+        grams: 15,
+        photo: '/dryfood.jpg',
       },
     ],
   },
@@ -116,12 +109,28 @@ const schedules = [
     endMinutes: 22 * 60 + 30,
     portionLabel: '1 dose',
     kind: 'pills',
-    priority: 3,
+    priority: 1,
     foods: [
       {
         name: 'Thyroid pills',
         grams: 0,
         photo: 'https://openclipart.org/download/309835/1541553679.svg',
+      },
+    ],
+  },
+  {
+    id: 'evening-treats',
+    title: 'Treats',
+    startMinutes: 22 * 60 + 30,
+    endMinutes: 23 * 60,
+    portionLabel: '1 portions',
+    kind: 'meal',
+    priority: 2,
+    foods: [
+      {
+        name: 'Teeth cleaning treat',
+        grams: 1,
+        photo: '/teethcleaning.jpg',
       },
     ],
   },
@@ -324,7 +333,7 @@ export default function Home() {
     <main className='min-h-screen bg-slate-50 text-slate-900'>
       <div className='mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-12'>
         <header className='flex flex-col items-start gap-4'>
-          <div className='flex flex-wrap items-center gap-6'>
+          <div className='flex items-center gap-6'>
             <img
               src='https://scontent-ber1-1.cdninstagram.com/v/t51.82787-15/532915064_18083694682857358_3567004977730663315_n.webp?_nc_cat=109&ig_cache_key=MzY5OTgzNTA4OTM1NjY2MzYwMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTQ0MC5zZHIuQzMifQ%3D%3D&_nc_ohc=mzR1ABECet4Q7kNvwH21L3z&_nc_oc=AdkF5hpeJf8Eqpl6CMCYtPQzlF5qjBRPiXzowQHBBYk51-205TjGDNhJ4RWAGL9Q0LN25lwA1EZGNTlLiVbGOQ4J&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ber1-1.cdninstagram.com&_nc_gid=sGqkJtssEJcVOoQkqktnsg&oh=00_AfqVJxabhUhzOVkQDe_PBmUdILKjttbxVYl61kUvKR6DDA&oe=69605E15'
               alt='Meggie'
@@ -391,11 +400,11 @@ export default function Home() {
                               Waiting
                             </span>
                           ) : null}
-                          {doneStatus[schedule.id] ? (
+                          {/* {doneStatus[schedule.id] ? (
                             <span className='rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700'>
                               Done
                             </span>
-                          ) : null}
+                          ) : null} */}
                         </div>
                         <p className='text-base font-semibold text-slate-900'>
                           {formatTime(schedule.startMinutes)} -{' '}
@@ -425,7 +434,7 @@ export default function Home() {
                   {(!doneStatus[schedule.id] && !isBlocked(schedule)) ||
                   activeSchedules.length <= 1 ? (
                     <>
-                      <div className='rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900'>
+                      <div className='rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900 mb-4'>
                         <div className='flex flex-wrap items-center justify-between gap-3'>
                           <div>
                             <p className='font-semibold'>Serving window</p>

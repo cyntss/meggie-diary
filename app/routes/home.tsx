@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Dog, Utensils } from "lucide-react";
 import type { Route } from "./+types/home";
 
 const schedules = [
@@ -334,9 +335,10 @@ export default function Home() {
                   <div>
                     <p className="text-sm text-slate-500">
                       {schedule.kind === "meal" ? (
-                        <span role="img" aria-label="Food" className="mr-2">
-                          🍽️
-                        </span>
+                        <Utensils
+                          className="mr-2 inline-block h-4 w-4 text-slate-400"
+                          aria-label="Food"
+                        />
                       ) : null}
                       {schedule.title}
                     </p>
@@ -369,10 +371,8 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="flex justify-center text-3xl">
-            <span role="img" aria-label="Dog walking">
-              🐕‍🦺
-            </span>
+          <div className="flex justify-center">
+            <Dog className="h-8 w-8 text-slate-500" aria-label="Dog walking" />
           </div>
         </section>
       </div>

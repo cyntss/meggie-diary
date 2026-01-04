@@ -146,7 +146,8 @@ const schedules = [
       {
         name: 'Walk',
         grams: 0,
-        photo: 'https://openclipart.org/download/309835/1541553679.svg',
+        photo:
+          'https://scontent-ber1-1.cdninstagram.com/v/t51.75761-15/479925449_18066979456857358_4458961641504129436_n.webp?_nc_cat=107&ig_cache_key=MzU2NzgxMjY5MzgwOTM3NzkzMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTQ0MC5zZHIuQzMifQ%3D%3D&_nc_ohc=UAfsfjda3cQQ7kNvwFMztVA&_nc_oc=AdkBvf8PaVv8bXeOT8YM6ZJhMymPMIIAyDQoaBx0w-LqQBK-DRDSEfWAqMzhcdK8Bu7_PNM-Z5EKW9n3zNGCYLN-&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ber1-1.cdninstagram.com&_nc_gid=SO45FfAIFu8qSe5Ew74JIA&oh=00_AfpW_kq-kDBO_UZs7GO7FfZskjQxkCDmWtkicCB9agvgng&oe=69609FBD',
       },
     ],
   },
@@ -162,7 +163,8 @@ const schedules = [
       {
         name: 'Walk',
         grams: 0,
-        photo: 'https://openclipart.org/download/309835/1541553679.svg',
+        photo:
+          'https://scontent-ber1-1.cdninstagram.com/v/t51.75761-15/479925449_18066979456857358_4458961641504129436_n.webp?_nc_cat=107&ig_cache_key=MzU2NzgxMjY5MzgwOTM3NzkzMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTQ0MC5zZHIuQzMifQ%3D%3D&_nc_ohc=UAfsfjda3cQQ7kNvwFMztVA&_nc_oc=AdkBvf8PaVv8bXeOT8YM6ZJhMymPMIIAyDQoaBx0w-LqQBK-DRDSEfWAqMzhcdK8Bu7_PNM-Z5EKW9n3zNGCYLN-&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ber1-1.cdninstagram.com&_nc_gid=SO45FfAIFu8qSe5Ew74JIA&oh=00_AfpW_kq-kDBO_UZs7GO7FfZskjQxkCDmWtkicCB9agvgng&oe=69609FBD',
       },
     ],
   },

@@ -247,19 +247,16 @@ export default function Home() {
     []
   );
 
-  const activeSchedule = schedules
+  const activeSchedules = schedules
     .filter(
       (schedule) =>
         minutesSinceMidnight >= schedule.startMinutes &&
         minutesSinceMidnight < schedule.endMinutes
     )
-    .sort(
-      (a, b) => a.endMinutes - a.startMinutes - (b.endMinutes - b.startMinutes)
-    )[0];
+    .sort((a, b) => a.startMinutes - b.startMinutes);
 
-  const totalGrams = activeSchedule
-    ? activeSchedule.foods.reduce((sum, item) => sum + item.grams, 0)
-    : 0;
+  const getTotalGrams = (schedule: (typeof schedules)[number]) =>
+    schedule.foods.reduce((sum, item) => sum + item.grams, 0);
 
   const handleToggleDone = (scheduleId: string) => {
     setDoneStatus((prev) => {
@@ -302,69 +299,87 @@ export default function Home() {
             <div>
               <p className='text-sm font-semibold text-slate-500'>Right now</p>
               <h2 className='text-2xl font-semibold text-slate-900'>
-                {activeSchedule ? activeSchedule.title : 'No scheduled meal'}
+                {activeSchedules.length > 0
+                  ? `${activeSchedules.length} item${
+                      activeSchedules.length > 1 ? 's' : ''
+                    } happening now`
+                  : 'No scheduled meal'}
               </h2>
             </div>
-            {activeSchedule ? (
-              <button
-                type='button'
-                onClick={() => handleToggleDone(activeSchedule.id)}
-                className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition ${
-                  doneStatus[activeSchedule.id]
-                    ? 'bg-emerald-500 text-white'
-                    : 'bg-slate-900 text-white hover:bg-slate-800'
-                }`}
-              >
-                {doneStatus[activeSchedule.id]
-                  ? 'Marked as done'
-                  : 'Mark as done'}
-              </button>
-            ) : null}
           </div>
 
-          {activeSchedule ? (
-            <div className='grid gap-6'>
-              <div className='rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900'>
-                <div className='flex flex-wrap items-center justify-between gap-3'>
-                  <div>
-                    <p className='font-semibold'>Serving window</p>
-                    <p>
-                      {formatTime(activeSchedule.startMinutes)} -{' '}
-                      {formatTime(activeSchedule.endMinutes)}
-                    </p>
-                  </div>
-                  <div>
-                    <p className='font-semibold'>Total grams</p>
-                    <p>
-                      {totalGrams} g • {activeSchedule.portionLabel}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className='grid gap-4 sm:grid-cols-2'>
-                {activeSchedule.foods.map((food) => (
-                  <article
-                    key={food.name}
-                    className='flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm'
-                  >
-                    <img
-                      src={food.photo}
-                      alt={food.name}
-                      className='h-40 w-full object-cover'
-                      loading='lazy'
-                    />
-                    <div className='flex flex-1 flex-col gap-2 p-4'>
-                      <h3 className='text-lg font-semibold text-slate-900'>
-                        {food.name}
-                      </h3>
-                      <p className='text-sm text-slate-600'>
-                        {food.grams} grams
+          {activeSchedules.length > 0 ? (
+            <div className='grid gap-8'>
+              {activeSchedules.map((schedule) => (
+                <div key={schedule.id} className='grid gap-6'>
+                  <div className='flex flex-wrap items-center justify-between gap-4'>
+                    <div>
+                      <p className='text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500'>
+                        {schedule.title}
+                      </p>
+                      <p className='text-base font-semibold text-slate-900'>
+                        {formatTime(schedule.startMinutes)} -{' '}
+                        {formatTime(schedule.endMinutes)}
                       </p>
                     </div>
-                  </article>
-                ))}
-              </div>
+                    <button
+                      type='button'
+                      onClick={() => handleToggleDone(schedule.id)}
+                      className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition ${
+                        doneStatus[schedule.id]
+                          ? 'bg-emerald-500 text-white'
+                          : 'bg-slate-900 text-white hover:bg-slate-800'
+                      }`}
+                    >
+                      {doneStatus[schedule.id]
+                        ? 'Marked as done'
+                        : 'Mark as done'}
+                    </button>
+                  </div>
+                  <div className='rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900'>
+                    <div className='flex flex-wrap items-center justify-between gap-3'>
+                      <div>
+                        <p className='font-semibold'>Serving window</p>
+                        <p>
+                          {formatTime(schedule.startMinutes)} -{' '}
+                          {formatTime(schedule.endMinutes)}
+                        </p>
+                      </div>
+                      <div>
+                        <p className='font-semibold'>Total grams</p>
+                        <p>
+                          {getTotalGrams(schedule)} g •{' '}
+                          {schedule.portionLabel}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='grid gap-4 sm:grid-cols-2'>
+                    {schedule.foods.map((food) => (
+                      <article
+                        key={food.name}
+                        className='flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm'
+                      >
+                        <img
+                          src={food.photo}
+                          alt={food.name}
+                          className='h-40 w-full object-cover'
+                          loading='lazy'
+                        />
+                        <div className='flex flex-1 flex-col gap-2 p-4'>
+                          <h3 className='text-lg font-semibold text-slate-900'>
+                            {food.name}
+                          </h3>
+                          <p className='text-sm text-slate-600'>
+                            {food.grams} grams
+                          </p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <p className='text-base text-slate-600'>

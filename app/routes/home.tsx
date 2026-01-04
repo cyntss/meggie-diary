@@ -331,8 +331,8 @@ export default function Home() {
             </div>
           ) : (
             <p className="text-base text-slate-600">
-              There&apos;s no scheduled meal right now. We&apos;ll surface the next feeding window
-              here as soon as it begins.
+              Nothing on Meggie&apos;s schedule right now. We&apos;ll show the next item as soon as it
+              begins.
             </p>
           )}
         </section>

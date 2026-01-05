@@ -171,7 +171,6 @@ const schedules = [
 ];
 
 const STORAGE_PREFIX = 'meggie-diary-done';
-const NOTIFICATION_PREFIX = 'meggie-diary-notified';
 type Schedule = (typeof schedules)[number];
 
 const scheduleSorter = (first: Schedule, second: Schedule) =>
@@ -245,16 +244,6 @@ function getStorageKey(dateKey: string, scheduleId: string) {
   return `${STORAGE_PREFIX}:${dateKey}:${scheduleId}`;
 }
 
-function getNotificationKey(dateKey: string, scheduleId: string) {
-  return `${NOTIFICATION_PREFIX}:${dateKey}:${scheduleId}`;
-}
-
-function getNotificationBody(schedule: Schedule) {
-  return `${schedule.title} (${formatTime(
-    schedule.startMinutes
-  )}-${formatTime(schedule.endMinutes)} Berlin time)`;
-}
-
 export default function Home() {
   const [timeParts, setTimeParts] = useState(getBerlinTimeParts);
   const [doneStatus, setDoneStatus] = useState<Record<string, boolean>>({});
@@ -269,16 +258,6 @@ export default function Home() {
     }, 30_000);
 
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !('Notification' in window)) {
-      return;
-    }
-
-    if (Notification.permission === 'default') {
-      Notification.requestPermission().catch(() => null);
-    }
   }, []);
 
   useEffect(() => {
@@ -323,35 +302,6 @@ export default function Home() {
   const activeScheduleIds = new Set(
     activeSchedules.map((schedule) => schedule.id)
   );
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !('Notification' in window)) {
-      return;
-    }
-
-    if (Notification.permission !== 'granted') {
-      return;
-    }
-
-    activeSchedules.forEach((schedule) => {
-      if (doneStatus[schedule.id]) {
-        return;
-      }
-
-      const key = getNotificationKey(timeParts.dateKey, schedule.id);
-      if (localStorage.getItem(key) === 'true') {
-        return;
-      }
-
-      const notification = new Notification("Meggie's diary", {
-        body: getNotificationBody(schedule),
-        tag: key,
-      });
-      notification.onclick = () => window.focus();
-
-      localStorage.setItem(key, 'true');
-    });
-  }, [activeSchedules, doneStatus, timeParts.dateKey]);
 
   const getTotalGrams = (schedule: (typeof schedules)[number]) =>
     schedule.foods.reduce((sum, item) => sum + item.grams, 0);

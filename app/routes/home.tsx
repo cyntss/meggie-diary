@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Dog, Pill, Utensils } from 'lucide-react';
 import type { Route } from './+types/home';
+import PageNav from '~/components/page-nav';
 
 const schedules = [
   {
@@ -357,6 +358,7 @@ export default function Home() {
   return (
     <main className='min-h-screen bg-slate-50 text-slate-900'>
       <div className='mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-12'>
+        <PageNav />
         <header className='flex flex-col items-start gap-4'>
           <div className='flex items-center gap-6'>
             <img

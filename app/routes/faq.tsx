@@ -26,14 +26,14 @@ export default function Faq() {
                 "Start with the highest priority item first. Use the schedule cards to confirm the time window before marking anything as done.",
             },
             {
-              question: "Where is Meggie&apos;s food stored?",
-              answer:
-                "Dry food is in the sealed container near the pantry. Wet food portions are pre-measured in the fridge.",
-            },
-            {
               question: "How long should walks be?",
               answer:
                 "Aim for 15-20 minutes per walk unless otherwise noted. Shorter walks are okay on hot afternoons.",
+            },
+            {
+              question: "What should I do if her poop becomes yellow or soft?",
+              answer:
+                "If the poop becomes a little yellow or soft, increase the ratio of Diet food vs Normal food. For example, if she&apos;s having 20gr diet and 60 normal, change to 60gr diet and 20 normal. Get in touch with me also if this happens so I can guide you.",
             },
           ].map((item) => (
             <article

@@ -33,7 +33,7 @@ export default function Faq() {
             {
               question: "What should I do if her poop becomes yellow or soft?",
               answer:
-                "If the poop becomes a little yellow or soft, increase the ratio of Diet food vs Normal food. For example, if she&apos;s having 20gr diet and 60 normal, change to 60gr diet and 20 normal. Get in touch with me also if this happens so I can guide you.",
+                "Please increase the portion of Diet food immediately. You should essentially reverse the current ratios.\n\n- Current: 20g Diet / 60g Normal\n- Switch to: 60g Diet / 20g Normal\n\nPlease contact me if you need to make this switch so I can provide further guidance.",
             },
           ].map((item) => (
             <article
@@ -43,7 +43,9 @@ export default function Faq() {
               <h2 className="text-lg font-semibold text-slate-900">
                 {item.question}
               </h2>
-              <p className="mt-2 text-sm text-slate-600">{item.answer}</p>
+              <p className="mt-2 whitespace-pre-line text-sm text-slate-600">
+                {item.answer}
+              </p>
             </article>
           ))}
         </section>

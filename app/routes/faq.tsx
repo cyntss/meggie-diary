@@ -28,7 +28,12 @@ export default function Faq() {
             {
               question: 'How long should walks be?',
               answer:
-                'Aim for 15-20 minutes per walk unless otherwise noted. Shorter walks are okay on hot afternoons.',
+                'Aim for 15-20 minutes per walk unless otherwise noted. Since it is winter, hot afternoons should not be a factor. She needs at least one longer walk (around 20 minutes) so she can poop. The afternoon walk can be a quick pee-and-back-inside, and the evening walk can be quick too if she only wants to pee and head back inside.',
+            },
+            {
+              question: 'Should she play in the snow?',
+              answer:
+                'No, she should not play in the snow. If there is a lot of snow, please check her feet after walks since small snow stones can get stuck between her pads and burn her feet.',
             },
             {
               question: 'What should I do if her poop becomes yellow or soft?',

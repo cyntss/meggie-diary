@@ -68,15 +68,19 @@ export default function EmergencyContacts() {
           </h2>
           <div className="mt-4 grid gap-3 text-sm text-slate-600">
             <p className="rounded-2xl bg-slate-50 px-4 py-3">
-              Bring Meggie&apos;s medical folder and medication list to any vet
-              visit.
-            </p>
-            <p className="rounded-2xl bg-slate-50 px-4 py-3">
               If there is bleeding, vomiting, or unusual lethargy, call the
               emergency clinic immediately.
             </p>
             <p className="rounded-2xl bg-slate-50 px-4 py-3">
-              Text Gaby &amp; Steve with updates after speaking to a provider.
+              If she&apos;s cleaning herself too much, please check her vagina
+              area to make sure she doesn&apos;t cause irritation to her skin.
+            </p>
+            <p className="rounded-2xl bg-slate-50 px-4 py-3">
+              If she ate something she shouldn&apos;t and there&apos;s blood in her
+              poop, if there is too much blood, take her to the vet. If
+              there&apos;s only a small trace, switch to 100% Diet food and NO dry
+              food. Get in touch with me also if this happens, but it&apos;s very
+              unlikely that it will happen.
             </p>
           </div>
         </section>

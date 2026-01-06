@@ -248,7 +248,7 @@ export default function Home() {
         ],
       },
     ],
-    [t],
+    [t]
   );
   const berlinTimer = useRef<number | undefined>(undefined);
   const [timeParts, setTimeParts] = useState(() => getBerlinTimeParts());
@@ -259,7 +259,7 @@ export default function Home() {
 
   const berlinNowLabel = useMemo(
     () => `${formatTime(timeParts.hour * 60 + timeParts.minute)}`,
-    [timeParts],
+    [timeParts]
   );
 
   const sortedSchedules = useMemo(() => {
@@ -271,7 +271,7 @@ export default function Home() {
     return sortedSchedules.filter(
       (schedule) =>
         currentMinutes >= schedule.startMinutes &&
-        currentMinutes <= schedule.endMinutes,
+        currentMinutes <= schedule.endMinutes
     );
   }, [sortedSchedules, timeParts]);
 
@@ -279,12 +279,14 @@ export default function Home() {
     activeSchedules.some(
       (activeSchedule) =>
         activeSchedule.priority < schedule.priority &&
-        !doneStatus[activeSchedule.id],
+        !doneStatus[activeSchedule.id]
     );
 
   const isToggleAllowed = (schedule: Schedule) => {
     const nowMinutes = timeParts.hour * 60 + timeParts.minute;
-    return nowMinutes >= schedule.startMinutes && nowMinutes <= schedule.endMinutes;
+    return (
+      nowMinutes >= schedule.startMinutes && nowMinutes <= schedule.endMinutes
+    );
   };
 
   const getTotalGrams = (schedule: Schedule) =>
@@ -348,7 +350,7 @@ export default function Home() {
 
   return (
     <main className='min-h-screen bg-slate-50 text-slate-900'>
-      <div className='mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-12'>
+      <div className='mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-5'>
         <PageNav />
         <header className='flex flex-col items-start gap-4'>
           <div className='flex items-center gap-6'>
@@ -456,7 +458,9 @@ export default function Home() {
                             </p>
                           </div>
                           <div>
-                            <p className='font-semibold'>{t('homeTotalGrams')}</p>
+                            <p className='font-semibold'>
+                              {t('homeTotalGrams')}
+                            </p>
                             <p>
                               {getTotalGrams(schedule)} g •{' '}
                               {schedule.portionLabel}

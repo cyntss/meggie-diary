@@ -11,9 +11,7 @@ export type Language = 'en' | 'es';
 
 type TranslationParams = Record<string, number | string>;
 
-type TranslationValue =
-  | string
-  | ((params: TranslationParams) => string);
+type TranslationValue = string | ((params: TranslationParams) => string);
 
 type TranslationDictionary = Record<string, TranslationValue>;
 
@@ -29,7 +27,7 @@ const translations: Record<Language, TranslationDictionary> = {
   en: {
     navHome: 'Home',
     navFaq: 'FAQ',
-    navEmergency: 'Emergency Contacts',
+    navEmergency: 'Emergencys',
     navAriaLabel: 'Primary navigation',
     languageEnglish: 'EN',
     languageSpanish: 'ES',
@@ -103,13 +101,14 @@ const translations: Record<Language, TranslationDictionary> = {
       'Please increase the portion of Diet food immediately. You should essentially reverse the current ratios.\n\n- Current: 20g Diet / 60g Normal\n- Switch to: 60g Diet / 20g Normal\n\nPlease contact me if you need to make this switch so I can provide further guidance.',
     faqChecklistTitle: 'Quick checklist',
     faqChecklistItemTime: 'Confirm Berlin time before giving meals or meds.',
-    faqChecklistItemTasks: 'Mark tasks done immediately to keep the schedule accurate.',
+    faqChecklistItemTasks:
+      'Mark tasks done immediately to keep the schedule accurate.',
     faqChecklistItemWhatsApp:
       'Send a quick whatsapp message if anything changes or feels unusual.',
     emergencyEyebrow: 'Support network',
     emergencyTitle: 'Emergency contacts',
     emergencyIntro:
-      'Keep these numbers handy in case Meggie needs urgent help. Replace placeholders with verified contacts.',
+      'Keep these numbers handy in case Meggie needs urgent help.',
     emergencyPrimaryVet: 'Primary veterinarian',
     emergencyClinic: '24/7 emergency clinic',
     emergencyPhoneLabel: 'Phone:',
@@ -140,13 +139,13 @@ const translations: Record<Language, TranslationDictionary> = {
   },
   es: {
     navHome: 'Inicio',
-    navFaq: 'Preguntas',
-    navEmergency: 'Contactos de emergencia',
+    navFaq: 'FAQ',
+    navEmergency: 'Emergencia',
     navAriaLabel: 'Navegación principal',
     languageEnglish: 'EN',
     languageSpanish: 'ES',
     homeDiary: 'Diario de Meggie',
-    homeTitle: 'La dulce guía de Meggie para Gaby y Steve',
+    homeTitle: 'La guía de Meggie para Gaby y Steve',
     homeIntro:
       'Gracias por cuidar de Meggie — aquí está su rutina de un vistazo.',
     homeBerlinTime: 'Hora actual en Berlín:',
@@ -223,7 +222,7 @@ const translations: Record<Language, TranslationDictionary> = {
     emergencyEyebrow: 'Red de apoyo',
     emergencyTitle: 'Contactos de emergencia',
     emergencyIntro:
-      'Ten estos números a mano por si Meggie necesita ayuda urgente. Reemplaza los marcadores con contactos verificados.',
+      'Ten estos números a mano por si Meggie necesita ayuda urgente.',
     emergencyPrimaryVet: 'Veterinario principal',
     emergencyClinic: 'Clínica de emergencia 24/7',
     emergencyPhoneLabel: 'Teléfono:',
@@ -255,14 +254,10 @@ const translations: Record<Language, TranslationDictionary> = {
 };
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(
-  undefined,
+  undefined
 );
 
-export function LanguageProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
 
   useEffect(() => {
@@ -291,7 +286,7 @@ export function LanguageProvider({
       }
       return value ?? key;
     },
-    [language],
+    [language]
   );
 
   const contextValue = useMemo(
@@ -300,7 +295,7 @@ export function LanguageProvider({
       setLanguage,
       t,
     }),
-    [language, setLanguage, t],
+    [language, setLanguage, t]
   );
 
   return (

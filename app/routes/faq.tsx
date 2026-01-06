@@ -24,7 +24,7 @@ export default function Faq() {
 
   return (
     <main className='min-h-screen bg-slate-50 text-slate-900'>
-      <div className='mx-auto flex w-full max-w-4xl flex-col gap-10 px-6 py-12'>
+      <div className='mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-5'>
         <PageNav />
         <header className='space-y-3'>
           <p className='text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500'>

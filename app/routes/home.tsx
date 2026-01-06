@@ -377,8 +377,8 @@ export default function Home() {
           </div>
           <div className='space-y-2'>
             <p className='text-base text-slate-600'>
-              Thanks for looking after Meggie — here&apos;s her Berlin-time
-              routine at a glance.
+              Thanks for looking after Meggie — here&apos;s her routine at a
+              glance.
             </p>
             <p className='text-base text-slate-600'>
               Current time in Berlin:{' '}

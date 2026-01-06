@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Dog, Pill, Utensils } from 'lucide-react';
 import type { Route } from './+types/home';
+import PageNav from '~/components/page-nav';
 
 const schedules = [
   {
@@ -357,6 +358,7 @@ export default function Home() {
   return (
     <main className='min-h-screen bg-slate-50 text-slate-900'>
       <div className='mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-12'>
+        <PageNav />
         <header className='flex flex-col items-start gap-4'>
           <div className='flex items-center gap-6'>
             <img
@@ -375,8 +377,8 @@ export default function Home() {
           </div>
           <div className='space-y-2'>
             <p className='text-base text-slate-600'>
-              Thanks for looking after Meggie — here&apos;s her Berlin-time
-              routine at a glance.
+              Thanks for looking after Meggie — here&apos;s her routine at a
+              glance.
             </p>
             <p className='text-base text-slate-600'>
               Current time in Berlin:{' '}

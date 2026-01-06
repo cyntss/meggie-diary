@@ -3,10 +3,10 @@ import PageNav from "~/components/page-nav";
 const contactCards = [
   {
     title: "Primary veterinarian",
-    name: "Dr. Lina Weber",
-    phone: "+49 30 555 0199",
-    location: "Tierarztpraxis Mitte, Berlin",
-    notes: "Regular checkups and medication guidance.",
+    name: "Kleintierpraxis am Uhlenhorst (Dr. Petra Kattinger & Dr. Volker Lammerschmidt)",
+    phone: "033203 70884",
+    location: "Uhlenhorst 8, 14532 Kleinmachnow",
+    notes: "Website: kleintierpraxis-uhlenhorst.de • Open now, closes 7pm.",
   },
   {
     title: "24/7 emergency clinic",

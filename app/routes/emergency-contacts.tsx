@@ -15,20 +15,6 @@ const contactCards = [
     location: "Ringstraße 12, Berlin",
     notes: "Call ahead before arriving after hours. More info: https://haustierdocs.de/?utm_source=print&utm_medium=HaustierDocs_Visitenkarte_85x55mm&utm_campaign=dfh1&utm_term=dfh&utm_content=home",
   },
-  {
-    title: "Poison control hotline",
-    name: "Berlin Animal Poison Line",
-    phone: "+49 30 555 0117",
-    location: "Remote support",
-    notes: "Share weight, symptoms, and possible exposure.",
-  },
-  {
-    title: "Backup caregiver",
-    name: "Nora Schmidt",
-    phone: "+49 170 555 0222",
-    location: "Neighbor in apartment 4B",
-    notes: "Can assist with walks or drop-in visits.",
-  },
 ];
 
 export default function EmergencyContacts() {

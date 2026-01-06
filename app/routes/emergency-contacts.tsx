@@ -6,14 +6,14 @@ const contactCards = [
     name: "Kleintierpraxis am Uhlenhorst (Dr. Petra Kattinger & Dr. Volker Lammerschmidt)",
     phone: "033203 70884",
     location: "Uhlenhorst 8, 14532 Kleinmachnow",
-    notes: "Website: kleintierpraxis-uhlenhorst.de • Open now, closes 7pm.",
+    notes: "Website: kleintierpraxis-uhlenhorst.de",
   },
   {
     title: "24/7 emergency clinic",
     name: "Tierklinik Nord",
     phone: "+49 30 555 0200",
     location: "Ringstraße 12, Berlin",
-    notes: "Call ahead before arriving after hours.",
+    notes: "Call ahead before arriving after hours. More info: https://haustierdocs.de/?utm_source=print&utm_medium=HaustierDocs_Visitenkarte_85x55mm&utm_campaign=dfh1&utm_term=dfh&utm_content=home",
   },
   {
     title: "Poison control hotline",

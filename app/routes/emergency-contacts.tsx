@@ -75,13 +75,21 @@ export default function EmergencyContacts() {
               If she&apos;s cleaning herself too much, please check her vagina
               area to make sure she doesn&apos;t cause irritation to her skin.
             </p>
-            <p className="rounded-2xl bg-slate-50 px-4 py-3">
-              If she ate something she shouldn&apos;t and there&apos;s blood in her
-              poop, if there is too much blood, take her to the vet. If
-              there&apos;s only a small trace, switch to 100% Diet food and NO dry
-              food. Get in touch with me also if this happens, but it&apos;s very
-              unlikely that it will happen.
-            </p>
+            <div className="rounded-2xl bg-slate-50 px-4 py-3">
+              <p className="font-semibold text-slate-700">
+                If she eats something she shouldn&apos;t and has blood in her
+                stool:
+              </p>
+              <ul className="mt-2 list-disc space-y-2 pl-5">
+                <li>Significant blood: Take her to the vet immediately.</li>
+                <li>
+                  Small trace: Switch to 100% Diet food only (NO dry food).
+                </li>
+              </ul>
+              <p className="mt-3">
+                Please contact me if either occurs, though it is very unlikely.
+              </p>
+            </div>
           </div>
         </section>
       </div>

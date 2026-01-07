@@ -92,6 +92,12 @@ const translations: Record<Language, TranslationDictionary> = {
     faqQuestionWalkLength: 'How long should walks be?',
     faqAnswerWalkLength:
       'Aim for 15-20 minutes per walk unless otherwise noted. She needs at least one longer walk (around 20 minutes) so she can poop. The afternoon walk can be shorter if needed. Sometimes she can poop, but try to keep her walking a bit, even if it is just 5 minutes. The evening walk can be just a quick pee and return, which is exactly what she needs.',
+    faqQuestionPillsRefill: 'The pills are finished. What should I do next?',
+    faqAnswerPillsRefill:
+      'In the small front pocket of the Gray Bag you will find 2 blisters. Take 3 pills and, using a knife, cut each one into 4 pieces. This will refill the next 6 days, with one day left empty. We always do it this way so we do not accidentally place more than 1 portion (one quarter pill) in a single slot of her pill container box.',
+    faqQuestionBags: "What's inside Meggie's bags?",
+    faqAnswerBags:
+      "- Dog Sana food (12 cans) (Comida Dog Sana - 12 latas)\n- Diet food (3 cans) (Comida dietética - 3 latas)\n- Pills in blister packs (2 blisters) (Pastillas en blíster - 2 blísteres)\n- Pasti treat container from the fridge (Pasti treat táper de heladera)\n- Pasti treat - new bag (Pasti treat - bolsa nueva)\n- Refrigerator food (Comida de heladera)\n- Food and water bowls (Platos de comida y agua)\n- Scale (Balanza)\n- Container with dry food (Táper con comida Dry)\n- Container with Gelenkes (Táper con Gelenkes)\n- Container with teeth treats + 1 new bag (Táper con teeth treats y 1 bolsa nueva)\n- Plush toys: Fishy and Donut (Peluches: Fishy y Donut)\n- Round bed (Cama redonda)\n- Square bed (Cama cuadrada)\n- Hall carpet (Carpet hall)\n- Training treats (Treats training)\n- Poop bags (3) (Bolsas de caca - 3)\n- Wet wipes (Wet wipes)\n- Intimate-area cleaning kit (Kit limpieza chochito)\n- Towel (Toalla)\n- Comb (Peine)",
     faqQuestionSnowPlay: 'Should she play in the snow?',
     faqAnswerSnowPlay:
       'It is absolutely forbidden for her to play in the snow. She loves it and will try, so please do not follow her lead. Her spine is still in recovery, so she should not run or jump for 6 months. If there is a lot of snow, please check her feet after walks since small snow stones can get stuck between her pads and burn her feet.',
@@ -205,6 +211,13 @@ const translations: Record<Language, TranslationDictionary> = {
     faqQuestionWalkLength: '¿Cuánto deben durar los paseos?',
     faqAnswerWalkLength:
       'Apunta a 15-20 minutos por paseo salvo indicación contraria. Necesita al menos un paseo más largo (unos 20 minutos) para que pueda hacer caca. El paseo de la tarde puede ser más corto si es necesario. A veces puede hacer caca, pero intenta que siga caminando un poco, aunque sean solo 5 minutos. El paseo de la noche puede ser solo un pipí rápido y volver, que es exactamente lo que necesita.',
+    faqQuestionPillsRefill:
+      'Se terminaron las pastillas. ¿Qué debo hacer ahora?',
+    faqAnswerPillsRefill:
+      'En el bolsillo pequeño delantero de la bolsa gris encontrarás 2 blísteres. Toma 3 pastillas y, con un cuchillo, corta cada una en 4 partes. Esto alcanza para rellenar los próximos 6 días, con un día vacío. Siempre lo hacemos así para no poner por error más de 1 porción (un cuarto de pastilla) en un solo compartimento de su pastillero.',
+    faqQuestionBags: '¿Qué hay dentro de las bolsas de Meggie?',
+    faqAnswerBags:
+      '- Comida Dog Sana (12 latas) (Dog Sana food - 12 cans)\n- Comida dietética (3 latas) (Diet food - 3 cans)\n- Pastillas en blíster (2 blísteres) (Pills in blister packs - 2 blisters)\n- Pasti treat táper de heladera (Pasti treat container from the fridge)\n- Pasti treat - bolsa nueva (Pasti treat - new bag)\n- Comida de heladera (Refrigerator food)\n- Platos de comida y agua (Food and water bowls)\n- Balanza (Scale)\n- Táper con comida Dry (Container with dry food)\n- Táper con Gelenkes (Container with Gelenkes)\n- Táper con teeth treats y 1 bolsa nueva (Container with teeth treats + 1 new bag)\n- Peluches: Fishy y Donut (Plush toys: Fishy and Donut)\n- Cama redonda (Round bed)\n- Cama cuadrada (Square bed)\n- Carpet hall (Hall carpet)\n- Treats training (Training treats)\n- Bolsas de caca (3) (Poop bags - 3)\n- Wet wipes (Wet wipes)\n- Kit limpieza chochito (Intimate-area cleaning kit)\n- Toalla (Towel)\n- Peine (Comb)',
     faqQuestionSnowPlay: '¿Debe jugar en la nieve?',
     faqAnswerSnowPlay:
       'Está absolutamente prohibido que juegue en la nieve. Le encanta y lo intentará, así que por favor no sigas su ejemplo. Su columna aún se está recuperando, por lo que no debe correr ni saltar durante 6 meses. Si hay mucha nieve, revisa sus patas después de los paseos porque pequeñas bolitas de nieve pueden quedarse entre las almohadillas y quemarle las patas.',

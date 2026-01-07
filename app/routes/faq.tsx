@@ -13,6 +13,14 @@ export default function Faq() {
       answer: t('faqAnswerWalkLength'),
     },
     {
+      question: t('faqQuestionPillsRefill'),
+      answer: t('faqAnswerPillsRefill'),
+    },
+    {
+      question: t('faqQuestionBags'),
+      answer: t('faqAnswerBags'),
+    },
+    {
       question: t('faqQuestionSnowPlay'),
       answer: t('faqAnswerSnowPlay'),
     },

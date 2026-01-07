@@ -70,7 +70,7 @@ const translations: Record<Language, TranslationDictionary> = {
     scheduleTreats1: '1 treat',
     scheduleDoseQuarter: '1/4 dose',
     scheduleWalkTime: 'Walk time',
-    scheduleFoodRegularHorse: 'Regular horse meat wet food',
+    scheduleFoodRegularHorse: 'Normal wet food',
     scheduleFoodDiet: 'Diet wet food',
     scheduleFoodGelenke: 'Gelenke treat once per day',
     scheduleFoodTeethClean: 'Teeth cleaning treat',
@@ -97,14 +97,14 @@ const translations: Record<Language, TranslationDictionary> = {
       'In the small front pocket of the Gray Bag you will find 2 blisters. Take 3 pills and, using a knife, cut each one into 4 pieces. This will refill the next 6 days, with one day left empty. We always do it this way so we do not accidentally place more than 1 portion (one quarter pill) in a single slot of her pill container box.',
     faqQuestionBags: "What's inside Meggie's bags?",
     faqAnswerBags:
-      '- Dog Sana food (12 cans)\n- Diet food (3 cans)\n- Pills in blister packs (2 blisters)\n- Pasti treat container from the fridge\n- Pasti treat - new bag\n- Refrigerator food\n- Food and water bowls\n- Scale\n- Container with dry food\n- Container with Gelenkes\n- Container with teeth treats + 1 new bag\n- Plush toys: Fishy and Donut\n- Round bed\n- Square bed\n- Hall carpet\n- Training treats\n- Poop bags (3)\n- Wet wipes\n- Intimate-area cleaning kit\n- Towel\n- Comb',
+      '- Dog Sana food (12 cans)\n- Diet food (3 cans)\n- Pills in blister packs (2 blisters - in small pocket in front)\n- Pills treat fridge tupperware\n- Pills treat - new bag (in case they run out from the tupperware)\n- Refrigerator food\n- Food and water bowls\n- Scale\n- Container with dry food\n- Container with Gelenke treats\n- Container with teeth treats + 1 new bag\n- Plush toys: Fishy and Donut\n- Round bed\n- Square bed\n- Hall carpet\n- Training treats\n- Poop bags (3)\n- Wet wipes\n- Intimate-area cleaning kit\n- Towel\n- Comb',
     faqQuestionSnowPlay: 'Should she play in the snow?',
     faqAnswerSnowPlay:
       'It is absolutely forbidden for her to play in the snow. She loves it and will try, so please do not follow her lead. Her spine is still in recovery, so she should not run or jump for 6 months. If there is a lot of snow, please check her feet after walks since small snow stones can get stuck between her pads and burn her feet.',
     faqQuestionPoopColor:
       'What should I do if her poop becomes yellow or soft?',
     faqAnswerPoopColor:
-      'Please increase the portion of Diet food immediately. You should essentially reverse the current ratios.\n\n- Current: 20g Diet / 60g Normal\n- Switch to: 60g Diet / 20g Normal\n\nPlease contact me if you need to make this switch so I can provide further guidance.',
+      'Please increase the portion of Diet food immediately. You should essentially reverse the current ratios.\n\n- Current:  20g Diet (Hills) / 60g Normal (Dog Sana)\n- Switch to: 60g Diet (Hills) / 20g Normal (Dog Sana)\n\nPlease contact me if you need to make this switch so I can provide further guidance.',
     faqChecklistTitle: 'Quick checklist',
     faqChecklistItemTime: 'Confirm Berlin time before giving meals or meds.',
     faqChecklistItemTasks:
@@ -131,7 +131,7 @@ const translations: Record<Language, TranslationDictionary> = {
     emergencyNotePoopSignificant:
       'Significant blood: Take her to the vet immediately.',
     emergencyNotePoopSmall:
-      'Small trace: Switch to 100% Diet food only (NO dry food).',
+      'Small trace: Switch to 100% (80gr) Diet food only (NO dry food at night).',
     emergencyNotePoopContact:
       'Please contact me if either occurs, though it is very unlikely.',
     emergencyOnline: 'online',
@@ -189,7 +189,7 @@ const translations: Record<Language, TranslationDictionary> = {
     scheduleTreats1: '1 premio',
     scheduleDoseQuarter: '1/4 de dosis',
     scheduleWalkTime: 'Tiempo de paseo',
-    scheduleFoodRegularHorse: 'Comida húmeda de caballo regular',
+    scheduleFoodRegularHorse: 'Comida húmeda regular',
     scheduleFoodDiet: 'Comida húmeda de dieta',
     scheduleFoodGelenke: 'Premio de articulaciones una vez al día',
     scheduleFoodTeethClean: 'Premio de limpieza dental',
@@ -217,14 +217,14 @@ const translations: Record<Language, TranslationDictionary> = {
       'En el bolsillo pequeño delantero de la bolsa gris encontrarás 2 blísteres. Toma 3 pastillas y, con un cuchillo, corta cada una en 4 partes. Esto alcanza para rellenar los próximos 6 días, con un día vacío. Siempre lo hacemos así para no poner por error más de 1 porción (un cuarto de pastilla) en un solo compartimento de su pastillero.',
     faqQuestionBags: '¿Qué hay dentro de las bolsas de Meggie?',
     faqAnswerBags:
-      '- Comida Dog Sana (12 latas)\n- Comida dietética (3 latas)\n- Pastillas en blíster (2 blísteres)\n- Pasti treat táper de heladera\n- Pasti treat - bolsa nueva\n- Comida de heladera\n- Platos de comida y agua\n- Balanza\n- Táper con comida Dry\n- Táper con Gelenkes\n- Táper con teeth treats y 1 bolsa nueva\n- Peluches: Fishy y Donut\n- Cama redonda\n- Cama cuadrada\n- Carpet hall\n- Treats training\n- Bolsas de caca (3)\n- Wet wipes\n- Kit limpieza chochito\n- Toalla\n- Peine',
+      '- Comida Dog Sana (12 latas)\n- Comida dietética (3 latas)\n- Pastillas en blíster (2 blísteres - en bolsillo pequeño delantero)\n- Pasti treat táper de heladera\n- Pasti treat - bolsa nueva\n- Comida de heladera\n- Platos de comida y agua\n- Balanza\n- Táper con comida Dry\n- Táper con Gelenkes\n- Táper con teeth treats y 1 bolsa nueva\n- Peluches: Fishy y Donut\n- Cama redonda\n- Cama cuadrada\n- Carpet hall\n- Treats training\n- Bolsas de caca (3)\n- Wet wipes\n- Kit limpieza zona vaginal\n- Toalla\n- Peine',
     faqQuestionSnowPlay: '¿Debe jugar en la nieve?',
     faqAnswerSnowPlay:
       'Está absolutamente prohibido que juegue en la nieve. Le encanta y lo intentará, así que por favor no sigas su ejemplo. Su columna aún se está recuperando, por lo que no debe correr ni saltar durante 6 meses. Si hay mucha nieve, revisa sus patas después de los paseos porque pequeñas bolitas de nieve pueden quedarse entre las almohadillas y quemarle las patas.',
     faqQuestionPoopColor:
       '¿Qué debo hacer si su caca se vuelve amarilla o blanda?',
     faqAnswerPoopColor:
-      'Por favor aumenta la porción de comida Diet inmediatamente. Básicamente debes invertir las proporciones actuales.\n\n- Actual: 20g Diet / 60g Normal\n- Cambiar a: 60g Diet / 20g Normal\n\nPor favor contáctame si necesitas hacer este cambio para poder orientarte.',
+      'Por favor aumenta la porción de comida Diet inmediatamente. Básicamente debes invertir las proporciones actuales.\n\n- Actual: 20g Diet (Hills) / 60g Normal (Dog Sana)\n- Cambiar a: 60g Diet (Hills) / 20g Normal (Dog Sana)\n\nPor favor contáctame si necesitas hacer este cambio para poder orientarte.',
     faqChecklistTitle: 'Lista rápida',
     faqChecklistItemTime:
       'Confirma la hora de Berlín antes de dar comidas o medicinas.',
@@ -252,7 +252,7 @@ const translations: Record<Language, TranslationDictionary> = {
     emergencyNotePoopSignificant:
       'Sangrado significativo: llévala al veterinario de inmediato.',
     emergencyNotePoopSmall:
-      'Rastro pequeño: cambia a 100% comida Diet solamente (SIN comida seca).',
+      'Rastro pequeño: cambia a 100% (80gr) comida Dietetica solamente (SIN comida seca a la noche).',
     emergencyNotePoopContact:
       'Por favor contáctame si ocurre cualquiera de los dos, aunque es muy poco probable.',
     emergencyOnline: 'en línea',
